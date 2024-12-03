@@ -6,28 +6,28 @@ import (
 	"testing"
 )
 
-func TestSolvePartOneExample(t *testing.T) {
+func TestHistorianHysteriaPtOneExample(t *testing.T) {
 	filename := test_utils.FilePrefix + "day_1/problem_input_1.txt"
 	actualOutput := historian_hysteria.SolvePartOne(filename)
 	expectedOutput := 11
 	test_utils.AssertEqual(t, expectedOutput, actualOutput)
 }
 
-func TestSolvePartTwoExample(t *testing.T) {
+func TestHistorianHysteriaPtTwoExample(t *testing.T) {
 	filename := test_utils.FilePrefix + "day_1/problem_input_1.txt"
 	actualOutput := historian_hysteria.SolvePartTwo(filename)
 	expectedOutput := 31
 	test_utils.AssertEqual(t, expectedOutput, actualOutput)
 }
 
-func TestSolvePartOne(t *testing.T) {
+func TestHistorianHysteriaPtOne(t *testing.T) {
 	filename := test_utils.FilePrefix + "day_1/problem_input_2.txt"
 	actualOutput := historian_hysteria.SolvePartOne(filename)
 	expectedOutput := 1873376
 	test_utils.AssertEqual(t, expectedOutput, actualOutput)
 }
 
-func TestSolvePartTwo(t *testing.T) {
+func TestHistorianHysteriaPtTwo(t *testing.T) {
 	filename := test_utils.FilePrefix + "day_1/problem_input_2.txt"
 	actualOutput := historian_hysteria.SolvePartTwo(filename)
 	expectedOutput := 18997088

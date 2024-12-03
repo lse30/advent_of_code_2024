@@ -1,6 +1,7 @@
 package historian_hysteria
 
 import (
+	"advent_of_code_2024/src/utils"
 	"bufio"
 	"log"
 	"os"
@@ -16,7 +17,7 @@ func SolvePartOne(fileName string) int {
 	sort.Ints(listB)
 	output := 0
 	for i := 0; i < len(listA); i++ {
-		distance := absValue(listA[i] - listB[i])
+		distance := utils.AbsValue(listA[i] - listB[i])
 		output += distance
 	}
 	return output
@@ -74,12 +75,4 @@ func splitList(original []int) ([]int, []int) {
 		outputB = append(outputB, original[i+1])
 	}
 	return outputA, outputB
-}
-
-// absValue calculates the absolute value
-func absValue(x int) int {
-	if x < 0 {
-		return -x
-	}
-	return x
 }
