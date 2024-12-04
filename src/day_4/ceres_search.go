@@ -1,8 +1,8 @@
 package ceres_search
 
 import (
+	"advent_of_code_2024/src/utils"
 	"fmt"
-	"os"
 )
 
 type coord struct {
@@ -10,6 +10,7 @@ type coord struct {
 	y int
 }
 
+// checkForWord Given a certain direction and starting coordinate, checks the map for a given word
 func checkForWord(startCoord coord, direction coord, letterMap [][]string, target string) bool {
 	for index := 0; index < len(target); index++ {
 		newX := startCoord.x + (direction.x * index)
@@ -25,6 +26,7 @@ func checkForWord(startCoord coord, direction coord, letterMap [][]string, targe
 	return true
 }
 
+// checkDirections Extends out the search in all directions from the starting coordinate
 func checkDirections(startCoord coord, target string, letterMap [][]string) int {
 	output := 0
 	for x := -1; x < 2; x++ {
@@ -37,6 +39,7 @@ func checkDirections(startCoord coord, target string, letterMap [][]string) int 
 	return output
 }
 
+// wordSearch Counts the number of occurrences of a word within the word search map
 func wordSearch(letterMap [][]string, target string) int {
 	output := 0
 	for i := 0; i < len(letterMap); i++ {
@@ -50,6 +53,8 @@ func wordSearch(letterMap [][]string, target string) int {
 	}
 	return output
 }
+
+// checkExpansion Checks if the word search contains an 'X' of correct letters in the map
 func checkExpansion(startCoord coord, letterMap [][]string) int {
 	forwardLeg := letterMap[startCoord.x-1][startCoord.y-1] + letterMap[startCoord.x+1][startCoord.y+1]
 	backLeg := letterMap[startCoord.x+1][startCoord.y-1] + letterMap[startCoord.x-1][startCoord.y+1]
@@ -59,12 +64,13 @@ func checkExpansion(startCoord coord, letterMap [][]string) int {
 	return 0
 }
 
+// crossSearch Counts the number of words that form an 'X' of correct letters in the map
 func crossSearch(letterMap [][]string) int {
 	output := 0
 	for i := 1; i < len(letterMap)-1; i++ {
 		line := letterMap[i]
 		for j := 1; j < len(line)-1; j++ {
-			if line[j] == string("A") {
+			if line[j] == "A" {
 				// finds the first letter
 				output += checkExpansion(coord{i, j}, letterMap)
 			}
@@ -75,7 +81,7 @@ func crossSearch(letterMap [][]string) int {
 
 func SolvePartOne(fileName string) int {
 	//fileName := "src/day_4/problem_input_1.txt"
-	data := readFileToString(fileName)
+	data := utils.ReadFileToString(fileName)
 	fmt.Println(data)
 	count := wordSearch(data, "XMAS")
 	return count
@@ -83,29 +89,8 @@ func SolvePartOne(fileName string) int {
 
 func SolvePartTwo(fileName string) int {
 	//fileName := "src/day_4/problem_input_1.txt"
-	data := readFileToString(fileName)
+	data := utils.ReadFileToString(fileName)
 	fmt.Println(data)
 	count := crossSearch(data)
 	return count
-}
-
-func readFileToString(fileName string) [][]string {
-	b, err := os.ReadFile(fileName)
-	if err != nil {
-		fmt.Print(err)
-	}
-	var output [][]string
-	fileStr := string(b)
-	var line []string
-	for i := 0; i < len(fileStr); i++ {
-		if fileStr[i] != '\n' {
-			line = append(line, string(fileStr[i]))
-		} else {
-			output = append(output, line)
-			line = []string{}
-		}
-
-	}
-	output = append(output, line)
-	return output
 }
