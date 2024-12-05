@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 // AbsValue calculates the absolute value
@@ -31,5 +32,15 @@ func ReadFileToString(fileName string) [][]string {
 
 	}
 	output = append(output, line)
+	return output
+}
+
+func ReadFileToRows(fileName string) []string {
+	b, err := os.ReadFile(fileName)
+	if err != nil {
+		fmt.Print(err)
+	}
+	fileStr := string(b)
+	output := strings.Split(fileStr, "\n")
 	return output
 }
