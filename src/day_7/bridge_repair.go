@@ -6,32 +6,26 @@ import (
 	"strings"
 )
 
-func listAdd(listA []int, listB []int) []int {
-	var output []int
-	for i := 0; i < len(listA); i++ {
-		output = append(output, listA[i])
-	}
-	for i := 0; i < len(listB); i++ {
-		output = append(output, listB[i])
-	}
+func listAdd(listA, listB []int) []int {
+	output := make([]int, len(listA)+len(listB))
+	copy(output, listA)
+	copy(output[len(listA):], listB)
 	return output
 }
 
 func solveLine(target int, values []int) bool {
 	if len(values) == 1 {
 		return target == values[0]
-	} else {
-		newMulti := []int{values[0] * values[1]}
-		newAdd := []int{values[0] + values[1]}
-		rem := values[2:]
-		multiList := listAdd(newMulti, rem)
-		addList := listAdd(newAdd, rem)
-		if solveLine(target, multiList) || solveLine(target, addList) {
-			return true
-		} else {
-			return false
-		}
 	}
+	newMulti := []int{values[0] * values[1]}
+	newAdd := []int{values[0] + values[1]}
+	rem := values[2:]
+	multiList := listAdd(newMulti, rem)
+	addList := listAdd(newAdd, rem)
+	if solveLine(target, multiList) || solveLine(target, addList) {
+		return true
+	}
+	return false
 }
 
 func concat(a int, b int) int {
@@ -43,20 +37,18 @@ func concat(a int, b int) int {
 func solveLineAdvanced(target int, values []int) bool {
 	if len(values) == 1 {
 		return target == values[0]
-	} else {
-		newMulti := []int{values[0] * values[1]}
-		newAdd := []int{values[0] + values[1]}
-		newConcat := []int{concat(values[0], values[1])}
-		rem := values[2:]
-		multiList := listAdd(newMulti, rem)
-		addList := listAdd(newAdd, rem)
-		concatList := listAdd(newConcat, rem)
-		if solveLineAdvanced(target, multiList) || solveLineAdvanced(target, addList) || solveLineAdvanced(target, concatList) {
-			return true
-		} else {
-			return false
-		}
 	}
+	newMulti := []int{values[0] * values[1]}
+	newAdd := []int{values[0] + values[1]}
+	newConcat := []int{concat(values[0], values[1])}
+	rem := values[2:]
+	multiList := listAdd(newMulti, rem)
+	addList := listAdd(newAdd, rem)
+	concatList := listAdd(newConcat, rem)
+	if solveLineAdvanced(target, multiList) || solveLineAdvanced(target, addList) || solveLineAdvanced(target, concatList) {
+		return true
+	}
+	return false
 }
 
 func parseLine(fileLine string) (int, []int) {
