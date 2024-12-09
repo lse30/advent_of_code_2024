@@ -2,7 +2,6 @@ package ceres_search
 
 import (
 	"advent_of_code_2024/src/utils"
-	"fmt"
 )
 
 type coord struct {
@@ -82,7 +81,6 @@ func crossSearch(letterMap [][]string) int {
 func SolvePartOne(fileName string) int {
 	//fileName := "src/day_4/problem_input_1.txt"
 	data := utils.ReadFileToString(fileName)
-	fmt.Println(data)
 	count := wordSearch(data, "XMAS")
 	return count
 }
@@ -90,7 +88,6 @@ func SolvePartOne(fileName string) int {
 func SolvePartTwo(fileName string) int {
 	//fileName := "src/day_4/problem_input_1.txt"
 	data := utils.ReadFileToString(fileName)
-	fmt.Println(data)
 	count := crossSearch(data)
 	return count
 }

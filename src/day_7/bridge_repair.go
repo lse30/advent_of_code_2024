@@ -2,7 +2,6 @@ package bridge_repair
 
 import (
 	"advent_of_code_2024/src/utils"
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -75,7 +74,6 @@ func parseLine(fileLine string) (int, []int) {
 
 func SolvePartOne(fileName string) int {
 	data := utils.ReadFileToRows(fileName)
-	fmt.Println(data)
 	var output int
 	for i := 0; i < len(data); i++ {
 		target, values := parseLine(data[i])
@@ -89,7 +87,6 @@ func SolvePartOne(fileName string) int {
 
 func SolvePartTwo(fileName string) int {
 	data := utils.ReadFileToRows(fileName)
-	fmt.Println(data)
 	var output int
 	for i := 0; i < len(data); i++ {
 		target, values := parseLine(data[i])

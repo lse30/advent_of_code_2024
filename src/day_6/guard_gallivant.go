@@ -2,7 +2,6 @@ package guard_gallivant
 
 import (
 	"advent_of_code_2024/src/utils"
-	"fmt"
 )
 
 const guard = '^'
@@ -129,7 +128,6 @@ func countNewObstructions(data []string) int {
 			if data[i][j] == '.' {
 				data = updateMap(data, coord{i, j}, '#')
 				if endsInLoop(data, guardStart, coord{-1, 0}, []cachedMapState{}) {
-					//printMap(data)
 					output++
 				}
 				data = updateMap(data, coord{i, j}, '.')
@@ -154,7 +152,6 @@ func findGuardPosition(data []string) coord {
 func countX(mapData []string) int {
 	output := 0
 	for i := 0; i < len(mapData); i++ {
-		fmt.Println(mapData[i])
 		for j := 0; j < len(mapData[i]); j++ {
 			if mapData[i][j] == 'X' || mapData[i][j] == '^' {
 				output++
