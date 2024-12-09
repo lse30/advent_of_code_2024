@@ -73,7 +73,6 @@ func SolvePartOne(fileName string) int {
 			output += target
 		}
 	}
-
 	return output
 }
 
@@ -86,6 +85,5 @@ func SolvePartTwo(fileName string) int {
 			output += target
 		}
 	}
-
 	return output
 }
