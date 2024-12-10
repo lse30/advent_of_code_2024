@@ -6,6 +6,12 @@ import (
 	"strings"
 )
 
+// Coord 2-dimensional coordinate type
+type Coord struct {
+	X int
+	Y int
+}
+
 // AbsValue calculates the absolute value
 func AbsValue(x int) int {
 	if x < 0 {
