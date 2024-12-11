@@ -20,13 +20,10 @@ func AbsValue(x int) int {
 	return x
 }
 
-func ReadFileToString(fileName string) [][]string {
-	b, err := os.ReadFile(fileName)
-	if err != nil {
-		fmt.Print(err)
-	}
+// ReadFileToUnits reads data from the file split by rows (\n)
+func ReadFileToUnits(fileName string) [][]string {
+	fileStr := ReadFileToString(fileName)
 	var output [][]string
-	fileStr := string(b)
 	var line []string
 	for i := 0; i < len(fileStr); i++ {
 		if fileStr[i] != '\n' {
@@ -35,18 +32,23 @@ func ReadFileToString(fileName string) [][]string {
 			output = append(output, line)
 			line = []string{}
 		}
-
 	}
 	output = append(output, line)
 	return output
 }
 
+// ReadFileToRows reads the file and splits the data by row
 func ReadFileToRows(fileName string) []string {
+	fileStr := ReadFileToString(fileName)
+	return strings.Split(fileStr, "\n")
+}
+
+// ReadFileToString Reads all the file into one string
+func ReadFileToString(fileName string) string {
 	b, err := os.ReadFile(fileName)
 	if err != nil {
 		fmt.Print(err)
 	}
 	fileStr := string(b)
-	output := strings.Split(fileStr, "\n")
-	return output
+	return fileStr
 }
