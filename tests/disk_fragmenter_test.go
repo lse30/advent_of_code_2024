@@ -13,18 +13,10 @@ func TestDiskFragmenterPtOneExample(t *testing.T) {
 	test_utils.AssertEqual(t, expectedOutput, actualOutput)
 }
 
-func TestDiskFragmenterPtOneExample2(t *testing.T) {
-	filename := test_utils.FilePrefix + "day_9/problem_input_3.txt"
-	actualOutput := disk_fragmenter.SolvePartOne(filename)
-	expectedOutput := 398
-	test_utils.AssertEqual(t, expectedOutput, actualOutput)
-}
-
 func TestDiskFragmenterPtOne(t *testing.T) {
 	filename := test_utils.FilePrefix + "day_9/problem_input_2.txt"
 	actualOutput := disk_fragmenter.SolvePartOne(filename)
-	// not 5714464252261
-	expectedOutput := 398
+	expectedOutput := 6366665108136
 	test_utils.AssertEqual(t, expectedOutput, actualOutput)
 }
 
