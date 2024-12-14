@@ -55,26 +55,54 @@ func buildMemoryBlock(data string) []memoryBlock {
 func findValidGap(memory []memoryBlock, gapLength int) int {
 	for i := 0; i < len(memory); i++ {
 		if memory[i].value == "." {
-
+			if memory[i].length >= gapLength {
+				return i
+			}
 		}
 	}
 	return -1
 }
 
-func compressMemory(memory []memoryBlock) []memoryBlock {
+func insertIntoMemory(memory []memoryBlock, target memoryBlock, index int) []memoryBlock {
 	var output []memoryBlock
+	for i := 0; i < len(memory); i++ {
+		output = append(output, memory[i])
+		if index == i {
+			output = append(output, target)
+		}
+	}
+	return output
+}
 
+func updateMemory(memory []memoryBlock, target memoryBlock, index int) []memoryBlock {
+	if memory[index].length == target.length {
+		memory[index].value = target.value
+		return memory
+	} else {
+		rem := memory[index].length - target.length
+		newBlock := memoryBlock{value: ".", length: rem}
+		memory[index].value = target.value
+		memory[index].length = target.length
+		return insertIntoMemory(memory, newBlock, index)
+	}
+
+}
+
+func compressMemory(memory []memoryBlock) []memoryBlock {
 	for k := len(memory) - 1; k >= 0; k-- {
-		fmt.Println(memory[k].length)
 		if memory[k].value == "." {
 			continue
 		} else {
 			gapIndex := findValidGap(memory[:k], memory[k].length)
-
+			if gapIndex != -1 {
+				target := memory[k]
+				memory[k].value = "."
+				memory = updateMemory(memory, target, gapIndex)
+			}
 		}
+		//displayMemory(memory)
 	}
-
-	return output
+	return memory
 }
 
 func compressMemoryV2(memory []string) []string {
@@ -107,20 +135,10 @@ func displayMemory(memory []memoryBlock) {
 	fmt.Println()
 }
 
-func displayMemoryString(memory []string) {
-	for _, block := range memory {
-		fmt.Print(block)
-		fmt.Print(",")
-	}
-	fmt.Println()
-}
-
 func calculateCheckSumString(memory []string) int {
 	output := 0
 	for i := 0; i < len(memory); i++ {
-		if memory[i] == "." {
-			return output
-		} else {
+		if memory[i] != "." {
 			value, _ := strconv.Atoi(memory[i])
 			output += i * value
 		}
@@ -132,7 +150,12 @@ func calculateCheckSum(memory []memoryBlock) int {
 	index := 0
 	output := 0
 	for _, block := range memory {
-		value, _ := strconv.Atoi(block.value)
+		var value int
+		if block.value == "." {
+			value = 0
+		} else {
+			value, _ = strconv.Atoi(block.value)
+		}
 		for i := 0; i < block.length; i++ {
 			output += value * index
 			index++
@@ -154,6 +177,8 @@ func SolvePartTwo(fileName string) int {
 	data := utils.ReadFileToString(fileName)
 	output := buildMemoryBlock(data)
 	displayMemory(output)
-	compressMemory(output)
-	return 1
+	memory := compressMemory(output)
+	checkSum := calculateCheckSum(memory)
+	return checkSum
+
 }

@@ -23,13 +23,13 @@ func TestDiskFragmenterPtOne(t *testing.T) {
 func TestDiskFragmenterPtTwoExample(t *testing.T) {
 	filename := test_utils.FilePrefix + "day_9/problem_input_1.txt"
 	actualOutput := disk_fragmenter.SolvePartTwo(filename)
-	expectedOutput := 34
+	expectedOutput := 2858
 	test_utils.AssertEqual(t, expectedOutput, actualOutput)
 }
 
 func TestDiskFragmenterPtTwo(t *testing.T) {
 	filename := test_utils.FilePrefix + "day_9/problem_input_2.txt"
 	actualOutput := disk_fragmenter.SolvePartTwo(filename)
-	expectedOutput := 1333
+	expectedOutput := 6398065450842
 	test_utils.AssertEqual(t, expectedOutput, actualOutput)
 }
