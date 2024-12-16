@@ -27,8 +27,8 @@ func combinePatterns(tokens []Token) string {
 	return output[1:]
 }
 
-// tokeniser Finds all occurrences of a target token
-func multiTokeniser(inputString string, tokens []Token) []string {
+// tokenizer Finds all occurrences of a target token
+func multiTokenizer(inputString string, tokens []Token) []string {
 	combinedPattern := regexp.MustCompile(combinePatterns(tokens))
 	// Find all matches
 	matches := combinedPattern.FindAllString(inputString, -1)
@@ -58,7 +58,7 @@ func readFileToString(fileName string) string {
 func SolvePartOne(fileName string) int {
 	fileContents := readFileToString(fileName)
 	output := 0
-	matches := multiTokeniser(fileContents, []Token{multiplication})
+	matches := multiTokenizer(fileContents, []Token{multiplication})
 	for _, match := range matches {
 		a, b := extractNumbers(match)
 		output += a * b
@@ -98,7 +98,7 @@ func solveMatchList(matches []string, tokens []Token) int {
 func SolvePartTwo(fileName string) int {
 	fileContents := readFileToString(fileName)
 	tokenList := []Token{multiplication, dos, donts}
-	matches := multiTokeniser(fileContents, tokenList)
+	matches := multiTokenizer(fileContents, tokenList)
 	output := solveMatchList(matches, tokenList)
 	return output
 }
