@@ -12,6 +12,13 @@ type Coord struct {
 	Y int
 }
 
+func (c Coord) AddCoord(other Coord) Coord {
+	return Coord{
+		X: c.X + other.X,
+		Y: c.Y + other.Y,
+	}
+}
+
 // AbsValue calculates the absolute value
 func AbsValue(x int) int {
 	if x < 0 {
@@ -51,4 +58,9 @@ func ReadFileToString(fileName string) string {
 	}
 	fileStr := string(b)
 	return fileStr
+}
+
+// InBounds checks if a given set of points is within a grid
+func InBounds(x int, y int, xLimit int, yLimit int) bool {
+	return x >= 0 && x < xLimit && y >= 0 && y < yLimit
 }
