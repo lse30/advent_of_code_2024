@@ -1,7 +1,7 @@
 package tests
 
 import (
-	claw_contraption "advent_of_code_2024/src/day_13"
+	"advent_of_code_2024/src/day_13"
 	"advent_of_code_2024/tests/test_utils"
 	"testing"
 )
