@@ -99,7 +99,9 @@ func evaluateMap(targetNode node, newCoord utils.Coord) {
 	}
 }
 
-func scoreblock(a int, b int, c int) int {
+// scoreBlock scores the corners in a 2x2 block, (1pt concave and 3pts convex)
+// this is due to convex always get counted 3 times and convex only once.
+func scoreBlock(a int, b int, c int) int {
 	if a == 0 {
 		if b == 0 {
 			if c == 0 {
@@ -131,14 +133,14 @@ func scoreblock(a int, b int, c int) int {
 	}
 }
 
+// Counts the corner score for a single node.
 func countCorners(a node) int {
-	outputA := scoreblock(a.nodeMap[0][0], a.nodeMap[0][1], a.nodeMap[1][0])
-	outputB := scoreblock(a.nodeMap[0][2], a.nodeMap[1][2], a.nodeMap[0][1])
-	outputC := scoreblock(a.nodeMap[2][2], a.nodeMap[2][1], a.nodeMap[1][2])
-	outputD := scoreblock(a.nodeMap[2][0], a.nodeMap[1][0], a.nodeMap[2][1])
+	// Rotate around a 3x3 in blocks on 2x2
+	outputA := scoreBlock(a.nodeMap[0][0], a.nodeMap[0][1], a.nodeMap[1][0])
+	outputB := scoreBlock(a.nodeMap[0][2], a.nodeMap[1][2], a.nodeMap[0][1])
+	outputC := scoreBlock(a.nodeMap[2][2], a.nodeMap[2][1], a.nodeMap[1][2])
+	outputD := scoreBlock(a.nodeMap[2][0], a.nodeMap[1][0], a.nodeMap[2][1])
 	output := outputA + outputB + outputC + outputD
-	//fmt.Printf("Map Score %d\n", output)
-	//a.printMapping()
 	return output
 }
 
