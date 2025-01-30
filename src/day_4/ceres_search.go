@@ -14,7 +14,7 @@ func checkForWord(startCoord coord, direction coord, letterMap [][]string, targe
 	for index := 0; index < len(target); index++ {
 		newX := startCoord.x + (direction.x * index)
 		newY := startCoord.y + (direction.y * index)
-		if newX >= 0 && newX < len(letterMap) && newY >= 0 && newY < len(letterMap[0]) {
+		if newX >= 0 && newX < len(letterMap[0]) && newY >= 0 && newY < len(letterMap) {
 			if letterMap[newX][newY] != string(target[index]) {
 				return false
 			}

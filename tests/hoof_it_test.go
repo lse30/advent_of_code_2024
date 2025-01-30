@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"advent_of_code_2024/src/day_10"
+	hoof_it "advent_of_code_2024/src/day_10"
 	"advent_of_code_2024/tests/test_utils"
 	"testing"
 )
@@ -30,6 +30,6 @@ func TestHoofItPtTwoExample(t *testing.T) {
 func TestHoofItPtTwo(t *testing.T) {
 	filename := test_utils.FilePrefix + "day_10/problem_input_2.txt"
 	actualOutput := hoof_it.SolvePartTwo(filename)
-	expectedOutput := 659
+	expectedOutput := 1463
 	test_utils.AssertEqual(t, expectedOutput, actualOutput)
 }

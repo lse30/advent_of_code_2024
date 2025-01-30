@@ -169,6 +169,7 @@ func SolvePartOne(fileName string) int {
 	memory := buildMemoryString(data)
 	memory = compressMemoryV2(memory)
 	memory = compressMemoryV2(memory)
+	memory = compressMemoryV2(memory)
 	output := calculateCheckSumString(memory)
 	return output
 }

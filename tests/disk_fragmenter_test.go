@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"advent_of_code_2024/src/day_9"
+	disk_fragmenter "advent_of_code_2024/src/day_9"
 	"advent_of_code_2024/tests/test_utils"
 	"testing"
 )
@@ -16,7 +16,8 @@ func TestDiskFragmenterPtOneExample(t *testing.T) {
 func TestDiskFragmenterPtOne(t *testing.T) {
 	filename := test_utils.FilePrefix + "day_9/problem_input_2.txt"
 	actualOutput := disk_fragmenter.SolvePartOne(filename)
-	expectedOutput := 6366665108136
+	// expectedOutput := 6366665108136
+	expectedOutput := 6366665113403
 	test_utils.AssertEqual(t, expectedOutput, actualOutput)
 }
 

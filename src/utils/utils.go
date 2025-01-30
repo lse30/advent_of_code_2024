@@ -33,7 +33,9 @@ func ReadFileToUnits(fileName string) [][]string {
 	var output [][]string
 	var line []string
 	for i := 0; i < len(fileStr); i++ {
-		if fileStr[i] != '\n' {
+		if fileStr[i] == '\r' {
+			continue
+		} else if fileStr[i] != '\n' {
 			line = append(line, string(fileStr[i]))
 		} else {
 			output = append(output, line)
@@ -47,7 +49,7 @@ func ReadFileToUnits(fileName string) [][]string {
 // ReadFileToRows reads the file and splits the data by row
 func ReadFileToRows(fileName string) []string {
 	fileStr := ReadFileToString(fileName)
-	return strings.Split(fileStr, "\n")
+	return strings.Split(fileStr, "\r\n")
 }
 
 // ReadFileToString Reads all the file into one string
